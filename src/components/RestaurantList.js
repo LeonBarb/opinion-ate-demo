@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import {loadRestaurants} from '../store/restaurants/actions';
 
 export function RestaurantList({loadRestaurants, restaurants}) {
@@ -17,7 +17,7 @@ export function RestaurantList({loadRestaurants, restaurants}) {
 }
 
 const mapStateToProps = state => ({
-  restaurants : state.restaurants.records,
+  restaurants: state.restaurants.records,
 });
 
 const mapDispatchToProps = {loadRestaurants};

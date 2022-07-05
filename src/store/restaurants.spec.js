@@ -2,7 +2,7 @@ import {applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {legacy_createStore as createStore} from 'redux';
 import restaurantsReducer from './restaurants/reducers';
-import {loadRestaurants} from "./restaurants/actions";
+import {loadRestaurants} from './restaurants/actions';
 
 describe('restaurants', () => {
   describe('loadRestaurants action', () => {

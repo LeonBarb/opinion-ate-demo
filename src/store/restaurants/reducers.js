@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {STORE_RESTAURANTS} from "./actions";
+import {STORE_RESTAURANTS} from './actions';
 
 function records(state = [], action) {
   switch (action.type) {

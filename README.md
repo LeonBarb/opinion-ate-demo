@@ -1,9 +1,11 @@
 # Getting Started with Create React App
-+#opinion-ate
-+An app for tracking reviews of dishes at diffrent restaurants.
-+Production: <https://opinion-test.netlify.app>
-+Dependencies are locked with a #yarn.lock' file, so please use 'yarn' instead
-+of 'npm' to install them.
+#opinion-ate
+An app for tracking reviews of dishes at diffrent restaurants.
+
+Production: <https://opinion-test.netlify.app>
+
+Dependencies are locked with a #yarn.lock' file, so please use 'yarn' instead
+of 'npm' to install them.
 
 
 

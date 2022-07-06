@@ -5,8 +5,14 @@ import {List} from '@mui/material';
 import {ListItem} from '@mui/material';
 import {ListItemText} from '@mui/material';
 import {CircularProgress} from '@mui/material';
+import {Alert} from '@mui/material';
 
-export function RestaurantList({loadRestaurants, restaurants, loading}) {
+export function RestaurantList({
+  loadRestaurants,
+  restaurants,
+  loading,
+  loadError,
+}) {
   useEffect(() => {
     loadRestaurants();
   }, [loadRestaurants]);
@@ -14,6 +20,9 @@ export function RestaurantList({loadRestaurants, restaurants, loading}) {
   return (
     <>
       {loading && <CircularProgress />}
+      {loadError && (
+        <Alert severity="error">Restaurants could not be loaded</Alert>
+      )}
       <List>
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>
@@ -27,6 +36,7 @@ export function RestaurantList({loadRestaurants, restaurants, loading}) {
 
 const mapStateToProps = state => ({
   restaurants: state.restaurants.records,
+  loading: state.restaurants.loading,
 });
 
 const mapDispatchToProps = {loadRestaurants};

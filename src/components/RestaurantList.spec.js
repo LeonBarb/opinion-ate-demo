@@ -13,6 +13,7 @@ describe('RestaurantList', () => {
       loadRestaurants: jest.fn().mockName('loadRestaurants'),
       restaurants,
       loading: false,
+      loadError: false,
       ...propOverrides,
     };
     loadRestaurants = props.loadRestaurants;
@@ -29,11 +30,27 @@ describe('RestaurantList', () => {
     expect(loadRestaurants).toHaveBeenCalled();
   });
 
+  describe('when loading fails', () => {
+    it('displays loading-error', () => {
+      renderComponent({loadError: true});
+      expect(
+        screen.getByText('Restaurants could not be loaded'),
+      ).toBeInTheDocument();
+    });
+  });
+
   describe('when loading succeeds', () => {
     it('displays the restaurants', () => {
       renderComponent();
       expect(screen.getByText('Sushi Place')).toBeInTheDocument();
       expect(screen.getByText('Pizza Place')).toBeInTheDocument();
+    });
+
+    it('does not display loading-error', () => {
+      renderComponent({loadError: false});
+      expect(
+        screen.queryByText('Restaurants could not be loaded'),
+      ).not.toBeInTheDocument();
     });
 
     it('does not display progressbar while not loading', () => {

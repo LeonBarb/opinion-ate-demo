@@ -1,17 +1,38 @@
-import {TextField} from '@mui/material';
+import {Alert, TextField} from '@mui/material';
 import {useState} from 'react';
 import {Button} from '@mui/material';
+import {connect} from 'react-redux';
+import {createRestaurant} from '../store/restaurants/actions';
 
 export function NewRestaurantForm({createRestaurant}) {
   const [name, setName] = useState('');
+  const [validationError, setValidationError] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    createRestaurant(name);
+    if (name) {
+      setServerError(false);
+      setValidationError(false);
+      try {
+        await createRestaurant(name);
+        setName('');
+      } catch {
+        setServerError(true);
+      }
+    } else {
+      setValidationError(true);
+    }
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      {serverError && (
+        <Alert severity="error">
+          The restaurant could not be saved. Please try again.
+        </Alert>
+      )}
+      {validationError && <Alert severity="error">Name is required</Alert>}
       <TextField
         value={name}
         onChange={e => setName(e.target.value)}
@@ -26,4 +47,7 @@ export function NewRestaurantForm({createRestaurant}) {
   );
 }
 
-export default NewRestaurantForm;
+const mapStateToProps = null;
+const mapDispatchToProps = {createRestaurant};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRestaurantForm);

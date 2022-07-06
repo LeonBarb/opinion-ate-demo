@@ -3,12 +3,15 @@ import {
   RECORD_LOADING_ERROR,
   STORE_RESTAURANTS,
   START_LOADING,
+  ADD_RESTAURANT,
 } from './actions';
 
 function records(state = [], action) {
   switch (action.type) {
     case STORE_RESTAURANTS:
       return action.records;
+    case ADD_RESTAURANT:
+      return [...state, action.record];
     default:
       return state;
   }
@@ -24,6 +27,7 @@ function loadError(state = false, action) {
       return state;
   }
 }
+
 
 function loading(state = false, action) {
   switch (action.type) {

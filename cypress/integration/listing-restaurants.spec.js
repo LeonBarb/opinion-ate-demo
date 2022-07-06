@@ -1,4 +1,4 @@
-describe('Listing Restaurants', () => {
+describe('Listing restaurants', () => {
   it('shows restaurants from the server', () => {
     const sushiPlace = 'Sushi Place';
     const pizzaPlace = 'Pizza Place';

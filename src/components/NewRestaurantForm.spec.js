@@ -22,7 +22,6 @@ describe('NewRestaurantForm', () => {
       renderComponent();
       expect(screen.queryByText(serverError)).not.toBeInTheDocument();
     });
-
   });
 
   describe('when filled in', () => {
@@ -75,13 +74,13 @@ describe('NewRestaurantForm', () => {
   });
 
   describe('when correcting a validation error', () => {
-    async function fixValidationError(){
+    async function fixValidationError() {
       renderComponent();
       createRestaurant.mockResolvedValue();
       userEvent.click(screen.getByText('Add'));
       await userEvent.type(
-          screen.getByPlaceholderText('Add Restaurant'),
-          restaurantName,
+        screen.getByPlaceholderText('Add Restaurant'),
+        restaurantName,
       );
       userEvent.click(screen.getByText('Add'));
       return act(flushPromises);
@@ -94,37 +93,38 @@ describe('NewRestaurantForm', () => {
   });
 
   describe('when the store action rejects', () => {
-    async function fillInForm(){
+    async function fillInForm() {
       renderComponent();
       createRestaurant.mockRejectedValue();
 
       await userEvent.type(
-          screen.getByPlaceholderText('Add Restaurant'),
-          restaurantName,
+        screen.getByPlaceholderText('Add Restaurant'),
+        restaurantName,
       );
       userEvent.click(screen.getByText('Add'));
       return act(flushPromises);
     }
     it('does not clear the name', async () => {
       await fillInForm();
-      expect(screen.getByPlaceholderText('Add Restaurant').value).toEqual(restaurantName);
+      expect(screen.getByPlaceholderText('Add Restaurant').value).toEqual(
+        restaurantName,
+      );
     });
 
     it('displays a server error', async () => {
       await fillInForm();
       expect(screen.getByText(serverError)).toBeInTheDocument();
     });
-
   });
 
   describe('when retrying after a server error', () => {
-    async function retrySubmittingForm(){
+    async function retrySubmittingForm() {
       renderComponent();
       createRestaurant.mockRejectedValueOnce().mockResolvedValueOnce();
 
       await userEvent.type(
-          screen.getByPlaceholderText('Add Restaurant'),
-          restaurantName,
+        screen.getByPlaceholderText('Add Restaurant'),
+        restaurantName,
       );
       userEvent.click(screen.getByText('Add'));
       await act(flushPromises);
@@ -133,9 +133,8 @@ describe('NewRestaurantForm', () => {
     }
 
     it('clears the server error', async () => {
-       await retrySubmittingForm();
+      await retrySubmittingForm();
       expect(screen.queryByText(serverError)).not.toBeInTheDocument();
     });
   });
-
 });

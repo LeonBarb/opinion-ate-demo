@@ -15,16 +15,14 @@ export const loadRestaurants = () => async (dispatch, getState, api) => {
 };
 
 export const createRestaurant = name => async (dispatch, getState, api) => {
-    const record = await api.createRestaurant(name);
-    dispatch(addRestaurant(record));
+  const record = await api.createRestaurant(name);
+  dispatch(addRestaurant(record));
 };
 
 const addRestaurant = record => ({
   type: ADD_RESTAURANT,
   record,
 });
-
-const recordServerError = () => ({type: RECORD_SERVER_ERROR});
 
 const startLoading = () => ({type: START_LOADING});
 

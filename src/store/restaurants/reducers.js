@@ -28,7 +28,6 @@ function loadError(state = false, action) {
   }
 }
 
-
 function loading(state = false, action) {
   switch (action.type) {
     case STORE_RESTAURANTS:
